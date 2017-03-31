@@ -1,0 +1,165 @@
+#http://www.cnblogs.com/known/archive/2009/06/25/1506707.html
+SET NAMES utf8;
+SET FOREIGN_KEY_CHECKS = 0;
+
+DROP TABLE IF EXISTS `company`;
+CREATE TABLE `company` (
+  `id`          	bigint(20)    NOT NULL    AUTO_INCREMENT,
+  `create_time` 	datetime      NOT NULL    COMMENT '数据记录创建时间',
+  `update_time` 	datetime      NOT NULL    COMMENT '数据记录更新时间',
+  `type`  			int(2)        DEFAULT 0   COMMENT '类型:1=B端供应商,2=B端采购商,0=运营平台',
+  `name`        	varchar(64)       		  COMMENT '公司单位名称',
+  `province`        varchar(64)       		  COMMENT '省',
+  `city`            varchar(64)       		  COMMENT '市',
+  `county`          varchar(128)       		  COMMENT '区/县',
+  `address`         varchar(128)       		  COMMENT '公司单位地址',
+  `contacts`        varchar(128)       		  COMMENT '联系人',
+  `logo`            varchar(64)       		  COMMENT '公司单位Logo',
+  `qq`              varchar(32)       		  COMMENT '公司单位qq',
+  `email`           varchar(64)       		  COMMENT '电子邮件',
+  `tel`             varchar(64)       		  COMMENT '电话',
+  `fax`             varchar(64)       		  COMMENT '传真',
+  `mobile`          varchar(64)       		  COMMENT '手机',
+  `aboutus`         varchar(1024)             COMMENT '公司简介',
+  `state`           int(2)        DEFAULT 0   COMMENT '状态(0=未审核，1=正常，2=停止)',
+  `level`           int(2)        DEFAULT 0   COMMENT '资质级别(A,B,C,D)',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=50000 DEFAULT CHARSET=utf8 COMMENT='公司表';
+
+DROP TABLE IF EXISTS `user`;
+CREATE TABLE `user` (
+  `id`          	bigint(20)    NOT NULL    AUTO_INCREMENT,
+  `create_time` 	datetime      NOT NULL    COMMENT '数据记录创建时间',
+  `update_time` 	datetime      NOT NULL    COMMENT '数据记录更新时间',
+  `last_login_time` datetime      DEFAULT NULL,
+  `name`        	varchar(64)   NOT NULL    COMMENT '用户名称',
+  `passwd`      	varchar(128)  NOT NULL    COMMENT '用户密码',
+  `realname`    	varchar(128)              COMMENT '身份证真实名字',
+  `role`        	varchar(64)   NOT NULL    COMMENT '用户权限角色',
+  `phone`       	varchar(64)   NOT NULL    COMMENT '用户手机号',
+  `email`       	varchar(256)  DEFAULT ''  COMMENT '用户邮箱',
+  `state`  			int(2)        DEFAULT 0   COMMENT '状态: 0=未审核,1=正常,2=停止',
+  
+  `company_id`      bigint(20)    NOT NULL    COMMENT '归属公司id',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=50000 DEFAULT CHARSET=utf8 COMMENT='用户表';
+
+DROP TABLE IF EXISTS `category`;
+CREATE TABLE `category` (
+  `id`          	bigint(20)    NOT NULL     AUTO_INCREMENT,
+  `create_time` 	datetime      NOT NULL     COMMENT '数据记录创建时间',
+  `update_time` 	datetime      NOT NULL     COMMENT '数据记录更新时间',
+  `name`        	varchar(64)   NOT NULL     COMMENT '类目名称',
+  `code`       	    varchar(256)  DEFAULT ''   COMMENT '类目编码',
+  `state`  			int(2)        DEFAULT 1    COMMENT '状态: 1=正常,2=停止',
+  `remark`       	varchar(256)  DEFAULT ''   COMMENT '类目说明',
+  
+  `parent_id`  		int(11)       DEFAULT NULL COMMENT '父类目id',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=0 DEFAULT CHARSET=utf8 COMMENT='商品类别表';
+
+DROP TABLE IF EXISTS `product`;
+CREATE TABLE `product` (
+  `id`          	bigint(20)    NOT NULL    AUTO_INCREMENT,
+  `create_time` 	datetime      NOT NULL    COMMENT '数据记录创建时间',
+  `update_time` 	datetime      NOT NULL    COMMENT '数据记录更新时间',
+  `title`        	varchar(64)   NOT NULL    COMMENT '商品标题',
+  `main_img`       	varchar(256)  DEFAULT ''  COMMENT '商品主图片',
+  `sub_img`       	varchar(256)  DEFAULT ''  COMMENT '商品副图片',
+  `introduction`    varchar(256)  DEFAULT ''  COMMENT '商品说明',
+  `content`    		text  		  DEFAULT ''  COMMENT '商品具体内容',
+  `price`  			int(5)        DEFAULT 0   COMMENT '商品价格,单位分',
+  `num`  			int(5)        DEFAULT 0   COMMENT '商品数量',
+  `state`  			int(2)        DEFAULT 0   COMMENT '状态: 0=未审核,1=正常出售中,2=停止',
+  `showcase`  		int(2)        DEFAULT 0   COMMENT '橱窗推荐: 0=不推荐,1=推荐',
+  
+  `category_id`     bigint(20)    NOT NULL    COMMENT '商品类别id',
+  `company_id`      bigint(20)    NOT NULL    COMMENT '供货商id',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=0 DEFAULT CHARSET=utf8 COMMENT='商品信息表';
+
+DROP TABLE IF EXISTS `storeOrder`;
+CREATE TABLE `storeOrder` (
+  `id`          	bigint(20)    NOT NULL    AUTO_INCREMENT,
+  `create_time` 	datetime      NOT NULL    COMMENT '数据记录创建时间',
+  `update_time` 	datetime      NOT NULL    COMMENT '数据记录更新时间',
+  `name`        	varchar(64)   NOT NULL    COMMENT '订单名称',
+  `state`  			int(2)        DEFAULT 0   COMMENT '订单状态: 0=未审核,1=正常,2=停止',
+  `remark`        	varchar(64)               COMMENT '订单备注',
+  
+  `consignee`       varchar(64)      		  COMMENT '收货人',
+  `province`        varchar(32)      		  COMMENT '省份',
+  `city`        	varchar(32)               COMMENT '城市',
+  `area`        	varchar(64)               COMMENT '区县',
+  `address`        	varchar(128)              COMMENT '地址',
+  `zipcode`        	varchar(16)               COMMENT '区号',
+  `telNum`        	varchar(16)               COMMENT '电话',
+  `mobile`        	varchar(16)               COMMENT '手机',
+  
+  `expres_type`     varchar(64)               COMMENT '物流公司',
+  `expres_time`     datetime              	  COMMENT '物流时间',
+  `expres_num`      varchar(64)               COMMENT '物流单号',
+  `expres_price`    int(5)                    COMMENT '物流价格',
+  `expres_weight`   int(5)                    COMMENT '物流重量',
+  
+  `pay_time` 	    datetime                  COMMENT '支付时间',
+  `pay_state`  		int(2)        DEFAULT 0   COMMENT '支付状态: 0=未支付,1=已支付,2=已发货',
+  `pay_type`        varchar(64)               COMMENT '支付类型 (网上支付，货到付款)',
+  `pay_plat`        varchar(64)               COMMENT '支付平台 例如 支付宝 ',
+  `pay_method`      varchar(64)               COMMENT '支付方式 银行/或者货到付款的现金/POST机',
+  
+  `invoice`         int(2)               	  COMMENT '是否需要发票:0=不需要,1=需要',
+  `invoice_type`    varchar(64)               COMMENT '发票类型(个人，公司)',
+  `invoice_title`   varchar(64)               COMMENT '发票抬头',
+  
+  `title`        	varchar(64)               COMMENT '商品标题',
+  `main_img`       	varchar(256)    		  COMMENT '商品主图片',
+  `price`  			int(5)        DEFAULT 0   COMMENT '商品价格,单位分',
+  
+  `product_id`      bigint(20)    NOT NULL    COMMENT '商品id',
+  `company_id`      bigint(20)    NOT NULL    COMMENT '供货商id',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=0 DEFAULT CHARSET=utf8 COMMENT='商家供货单表';
+
+DROP TABLE IF EXISTS `custonerOrder`;
+CREATE TABLE `custonerOrder` (
+  `id`          	bigint(20)    NOT NULL    AUTO_INCREMENT,
+  `create_time` 	datetime      NOT NULL    COMMENT '数据记录创建时间',
+  `update_time` 	datetime      NOT NULL    COMMENT '数据记录更新时间',
+  `name`        	varchar(64)   NOT NULL    COMMENT '订单名称',
+  `state`  			int(2)        DEFAULT 0   COMMENT '订单状态: 0=未审核,1=正常,2=停止',
+  `remark`        	varchar(64)               COMMENT '订单备注',
+  
+  `consignee`       varchar(64)      		  COMMENT '收货人',
+  `province`        varchar(32)      		  COMMENT '省份',
+  `city`        	varchar(32)               COMMENT '城市',
+  `area`        	varchar(64)               COMMENT '区县',
+  `address`        	varchar(128)              COMMENT '地址',
+  `zipcode`        	varchar(16)               COMMENT '区号',
+  `telNum`        	varchar(16)               COMMENT '电话',
+  `mobile`        	varchar(16)               COMMENT '手机',
+  
+  `expres_type`     varchar(64)               COMMENT '物流公司',
+  `expres_time`     datetime              	  COMMENT '物流时间',
+  `expres_num`      varchar(64)               COMMENT '物流单号',
+  `expres_price`    int(5)                    COMMENT '物流价格',
+  `expres_weight`   int(5)                    COMMENT '物流重量',
+  
+  `pay_time` 	    datetime                  COMMENT '支付时间',
+  `pay_state`  		int(2)        DEFAULT 0   COMMENT '支付状态: 0=未支付,1=已支付,2=已发货',
+  `pay_type`        varchar(64)               COMMENT '支付类型 (网上支付，货到付款)',
+  `pay_plat`        varchar(64)               COMMENT '支付平台 例如 支付宝 ',
+  `pay_method`      varchar(64)               COMMENT '支付方式 银行/或者货到付款的现金/POST机',
+  
+  `invoice`         int(2)               	  COMMENT '是否需要发票:0=不需要,1=需要',
+  `invoice_type`    varchar(64)               COMMENT '发票类型(个人，公司)',
+  `invoice_title`   varchar(64)               COMMENT '发票抬头',
+  
+  `title`        	varchar(64)               COMMENT '商品标题',
+  `main_img`       	varchar(256)    		  COMMENT '商品主图片',
+  `price`  			int(5)        DEFAULT 0   COMMENT '商品价格,单位分',
+  
+  `product_id`      bigint(20)    NOT NULL    COMMENT '商品id',
+  `company_id`      bigint(20)    NOT NULL    COMMENT '采购商id',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=0 DEFAULT CHARSET=utf8 COMMENT='用户定单表';

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<taglib xmlns="http://java.sun.com/xml/ns/j2ee"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-jsptaglibrary_2_0.xsd"
+    version="2.0">
+  <description>EnumTag</description>
+  <display-name>EnumTag</display-name>
+  <tlib-version>1.0</tlib-version>
+  <short-name>et</short-name>
+  <uri>http://www.xxg.com/jsp/jstl/EnumTag</uri>
+    <function>
+		<description>获取枚举值Name</description>
+		<name>str</name>
+		<function-class>com.yongchang.b2b.cons.EnumCollections</function-class>
+		<function-signature>java.lang.String enumName(java.lang.String,java.lang.Integer)</function-signature>
+	</function>
+	<!--  
+	<function>
+		<description>获取枚举值Value</description>
+		<name>int</name>
+		<function-class>com.yongchang.b2b.cons.EnumCollections</function-class>
+		<function-signature>java.lang.Integer enumValue(java.lang.String,java.lang.String)</function-signature>
+	</function>
+	-->
+</taglib>

@@ -1,0 +1,86 @@
+[
+	{
+        "title": "认证码管理",
+        "link": "/admin/code",
+        "child": [	
+        			{
+				        "title": "认证码查看", 
+				        "link": "/admin/code"
+				    }, 
+				    {
+				        "title": "认证码创建", 
+				        "link": "/admin/code/0"
+				    }, 
+				    {
+				        "title": "认证码删除", 
+				        "link": "/admin/code/*"
+				    }  
+        		 ]
+    }, 
+    {
+        "title": "供货商店铺", 
+        "link": "/admin/supplierStore",
+    }, 
+    {
+        "title": "供应商列表", 
+        "link": "/admin/supplier",
+        "child": [	
+        			{
+				        "title": "供应商查看", 
+				        "link": "/admin/supplier"
+				    }, 
+				    {
+				        "title": "供应商创建", 
+				        "link": "/admin/supplier/0"
+				    }, 
+				    {
+				        "title": "供应商编辑", 
+				        "link": "/admin/store/*"
+				    }  
+        		 ]
+    }, 
+    {
+        "title": "采购商列表", 
+        "link": "/admin/buyer"
+    }, 
+    {
+        "title": "规格管理", 
+        "link": "/admin/model"
+    }, 
+    {
+        "title": "类别管理", 
+        "link": "/admin/category"
+    }, 
+    {
+        "title": "产品管理", 
+        "link": "/admin/product"
+    }, 
+    {
+        "title": "采购商品汇总", 
+        "link": "/admin/order/summery"
+    }, 
+    {
+        "title": "采购商品历史", 
+        "link": "/admin/order/summery/history"
+    }, 
+    {
+        "title": "采购订单", 
+        "link": "/admin/order/buyer"
+    }, 
+    {
+        "title": "供货订单", 
+        "link": "/admin/order/supplier"
+    }, 
+    {
+        "title": "历史订单", 
+        "link": "/admin/order/supplier/history"
+    }, 
+    {
+        "title": "员工管理", 
+        "link": "/admin/user"
+    }, 
+    {
+        "title": "角色管理", 
+        "link": "/admin/role"
+    }
+]
