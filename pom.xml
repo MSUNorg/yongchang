@@ -21,7 +21,7 @@
         <spring.version>4.1.2.RELEASE</spring.version>
         <hibernate.version>4.3.5.Final</hibernate.version>
         <spring-data-jpa.version>1.6.0.RELEASE</spring-data-jpa.version>
-        <junit.version>4.12</junit.version>
+        <junit.version>4.13.1</junit.version>
         
         <tomcat.version>7.0.59</tomcat.version>
         <start-class>com.yongchang.b2b.Application</start-class>
